@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive — Design Daily</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23000' width='100' height='100'/><text y='.85em' x='50%' text-anchor='middle' font-size='70' fill='white'>D</text></svg>">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main class="main">
+        <div class="container">
+            <!-- Header -->
+            <header class="archive-header">
+                <p class="archive-subtitle">Archive</p>
+                <h1 class="archive-title">
+                    Explore<br>by<br>Category
+                </h1>
+            </header>
+
+            <!-- Category Filter -->
+            <div class="category-filter">
+                <button class="category-btn active">All</button>
+                <button class="category-btn">Bauhaus</button>
+                <button class="category-btn">Graphic Design</button>
+                <button class="category-btn">Product Design</button>
+                <button class="category-btn">Architecture</button>
+                <button class="category-btn">Typography</button>
+                <button class="category-btn">Editorial</button>
+            </div>
+
+            <!-- Works Count -->
+            <p class="works-count">29 Works</p>
+
+            <!-- Archive List -->
+            <div class="archive-list" id="archiveList"></div>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+                <span>Today</span>
+            </a>
+            <a href="archive.html" class="nav-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="3" y="3" width="7" height="7"/>
+                    <rect x="14" y="3" width="7" height="7"/>
+                    <rect x="14" y="14" width="7" height="7"/>
+                    <rect x="3" y="14" width="7" height="7"/>
+                </svg>
+                <span>Archive</span>
+            </a>
+            <a href="about.html" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="16" x2="12" y2="12"/>
+                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                </svg>
+                <span>Info</span>
+            </a>
+        </div>
+    </nav>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

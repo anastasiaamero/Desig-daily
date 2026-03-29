@@ -1,0 +1,110 @@
+[
+  {
+    "id": "wassily-chair",
+    "author": "Marcel Breuer",
+    "title": "Wassily Chair (Model B3)",
+    "year": 1925,
+    "type": "furniture",
+    "movement": "Bauhaus",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Wassily_Chair_Breuer.jpg",
+    "image_wiki": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Wassily_Chair_Breuer.jpg",
+    "image_museum": "https://www.moma.org/collection/works/4049",
+    "description": "Иконичное кресло из трубчатой стали и кожи. Один из символов функционализма Баухауса."
+  },
+  {
+    "id": "cesca-chair",
+    "author": "Marcel Breuer",
+    "title": "Cesca Chair",
+    "year": 1928,
+    "type": "furniture",
+    "movement": "Bauhaus",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Cesca_Chair.jpg",
+    "image_wiki": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Cesca_Chair.jpg",
+    "image_museum": "https://www.moma.org/collection/works/4048",
+    "description": "Стул с консольной рамой из стальной трубы и плетёным сиденьем. Классика модернизма."
+  },
+  {
+    "id": "baby-cradle",
+    "author": "Peter Keler",
+    "title": "Baby Cradle",
+    "year": 1922,
+    "type": "object",
+    "movement": "Bauhaus",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Keler_Baby_Cradle.jpg",
+    "image_wiki": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Keler_Baby_Cradle.jpg",
+    "image_museum": "https://collection.bauhaus.de/en/werk/100.463.1/",
+    "description": "Колыбель из простых геометрических форм и основных цветов. Чистая демонстрация языка Баухауса."
+  },
+  {
+    "id": "bauhaus-chess-set",
+    "author": "Josef Hartwig",
+    "title": "Bauhaus Chess Set",
+    "year": 1923,
+    "type": "object",
+    "movement": "Bauhaus",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Bauhaus_Chess_Set.jpg",
+    "image_wiki": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Bauhaus_Chess_Set.jpg",
+    "image_museum": "https://collection.bauhaus.de/en/werk/100.463.2/",
+    "description": "Минималистичный шахматный набор, где форма каждой фигуры отражает её ходы."
+  },
+  {
+    "id": "bauhaus-poster-1923",
+    "author": "Joost Schmidt",
+    "title": "Bauhaus Exhibition Poster",
+    "year": 1923,
+    "type": "poster",
+    "movement": "Bauhaus",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Bauhaus_1923_poster.jpg",
+    "image_wiki": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Bauhaus_1923_poster.jpg",
+    "image_museum": "https://www.moma.org/collection/works/6343",
+    "description": "Постер к выставке Баухауса 1923 года: геометрия, асимметрия, гротескная типографика."
+  },
+  {
+    "id": "universal-typeface",
+    "author": "Herbert Bayer",
+    "title": "Universal Typeface",
+    "year": 1925,
+    "type": "typography",
+    "movement": "Bauhaus",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Bayer_Universal_Typeface.jpg",
+    "image_wiki": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Bayer_Universal_Typeface.jpg",
+    "image_museum": "https://www.moma.org/collection/works/126",
+    "description": "Экспериментальный гротеск без прописных букв. Попытка создать универсальный алфавит."
+  },
+  {
+    "id": "ship-building-game",
+    "author": "Alma Siedhoff-Buscher",
+    "title": "Small Ship-Building Game",
+    "year": 1923,
+    "type": "toy",
+    "movement": "Bauhaus",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Alma_Siedhoff-Buscher_Schiffbauspiel.jpg",
+    "image_wiki": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Alma_Siedhoff-Buscher_Schiffbauspiel.jpg",
+    "image_museum": "https://collection.bauhaus.de/en/werk/100.463.3/",
+    "description": "Набор деревянных модулей в базовых формах и цветах. Учебный инструмент композиции."
+  },
+  {
+    "id": "wagenfeld-lamp",
+    "author": "Wilhelm Wagenfeld",
+    "title": "Bauhaus Table Lamp",
+    "year": 1924,
+    "type": "lighting",
+    "movement": "Bauhaus",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Wagenfeld_Lamp.jpg",
+    "image_wiki": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Wagenfeld_Lamp.jpg",
+    "image_museum": "https://www.moma.org/collection/works/2481",
+    "description": "Настольная лампа с цилиндрической ножкой и стеклянным плафоном. Икона индустриального дизайна."
+  },
+  {
+    "id": "haus-am-horn",
+    "author": "Georg Muche",
+    "title": "Haus am Horn",
+    "year": 1923,
+    "type": "architecture",
+    "movement": "Bauhaus",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Haus_am_Horn_Weimar.jpg",
+    "image_wiki": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Haus_am_Horn_Weimar.jpg",
+    "image_museum": "https://collection.bauhaus.de/en/werk/100.463.4/",
+    "description": "Показательный дом Баухауса в Веймаре: компактный план, функциональная организация пространства."
+  }
+]

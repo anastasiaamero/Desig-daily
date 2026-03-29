@@ -1,0 +1,102 @@
+[
+  {
+    "id": "wassily-chair",
+    "author": "Marcel Breuer",
+    "title": "Wassily Chair (Model B3)",
+    "year": 1925,
+    "type": "furniture",
+    "movement": "Bauhaus",
+    "image": "images/bauhaus/wassily-chair.jpg",
+    "description": "Иконичное кресло из трубчатой стали и кожи, радикально упростившее форму классического клубного кресла. Один из символов функционализма и индустриальной эстетики Баухауса."
+  },
+  {
+    "id": "cesca-chair",
+    "author": "Marcel Breuer",
+    "title": "Cesca Chair",
+    "year": 1928,
+    "type": "furniture",
+    "movement": "Bauhaus",
+    "image": "images/bauhaus/cesca-chair.jpg",
+    "description": "Стул с консольной рамой из стальной трубы и плетёным сиденьем. Один из первых массовых стульев без задних ножек, ставший классикой модернизма."
+  },
+  {
+    "id": "baby-cradle",
+    "author": "Peter Keler",
+    "title": "Baby Cradle",
+    "year": 1922,
+    "type": "object",
+    "movement": "Bauhaus",
+    "image": "images/bauhaus/baby-cradle.jpg",
+    "description": "Колыбель, построенная из простых геометрических форм и основных цветов. Чистая демонстрация цветовой теории и формального языка Баухауса."
+  },
+  {
+    "id": "bauhaus-chess-set",
+    "author": "Josef Hartwig",
+    "title": "Bauhaus Chess Set",
+    "year": 1923,
+    "type": "object",
+    "movement": "Bauhaus",
+    "image": "images/bauhaus/chess-set.jpg",
+    "description": "Минималистичный шахматный набор, где форма каждой фигуры отражает её возможные ходы. Концептуальный дизайн, сведённый к функции и геометрии."
+  },
+  {
+    "id": "bauhaus-poster-1923",
+    "author": "Joost Schmidt",
+    "title": "Bauhaus Exhibition Poster",
+    "year": 1923,
+    "type": "poster",
+    "movement": "Bauhaus",
+    "image": "images/bauhaus/joost-schmidt-poster-1923.jpg",
+    "description": "Постер к выставке Баухауса 1923 года: геометрическая композиция, асимметрия, гротескная типографика и смелое использование красного, чёрного и белого."
+  },
+  {
+    "id": "universal-typeface",
+    "author": "Herbert Bayer",
+    "title": "Universal Typeface",
+    "year": 1925,
+    "type": "typography",
+    "movement": "Bauhaus",
+    "image": "images/bauhaus/universal-typeface.jpg",
+    "description": "Экспериментальный гротеск без прописных букв, стремящийся к универсальному алфавиту. Воплощение идеи рациональной, функциональной типографики."
+  },
+  {
+    "id": "small-ship-building-game",
+    "author": "Alma Siedhoff-Buscher",
+    "title": "Small Ship-Building Game",
+    "year": 1923,
+    "type": "toy",
+    "movement": "Bauhaus",
+    "image": "images/bauhaus/ship-building-game.jpg",
+    "description": "Набор деревянных модулей в базовых формах и цветах, из которых можно собирать корабли. Игрушка как учебный инструмент композиции и формы."
+  },
+  {
+    "id": "slatted-chair",
+    "author": "Marcel Breuer",
+    "title": "Slatted Chair (Ti 1a)",
+    "year": 1924,
+    "type": "furniture",
+    "movement": "Bauhaus",
+    "image": "images/bauhaus/slatted-chair.jpg",
+    "description": "Деревянное кресло с простыми планками и ясной конструкцией. Переходный этап от традиционной мебели к индустриальному модернизму."
+  },
+  {
+    "id": "table-lamp-wagenfeld",
+    "author": "Wilhelm Wagenfeld",
+    "title": "Bauhaus Table Lamp",
+    "year": 1924,
+    "type": "lighting",
+    "movement": "Bauhaus",
+    "image": "images/bauhaus/wagenfeld-lamp.jpg",
+    "description": "Настольная лампа с цилиндрической ножкой и сферическим плафоном из стекла. Идеальный баланс между индустриальной формой и домашней атмосферой."
+  },
+  {
+    "id": "haus-am-horn",
+    "author": "Georg Muche",
+    "title": "Haus am Horn",
+    "year": 1923,
+    "type": "architecture",
+    "movement": "Bauhaus",
+    "image": "images/bauhaus/haus-am-horn.jpg",
+    "description": "Показательный дом Баухауса в Веймаре: компактный план, функциональная организация пространства и минималистичный фасад."
+  }
+]

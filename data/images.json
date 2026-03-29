@@ -1,0 +1,24 @@
+{
+  "images": {
+    "wassily-chair": "images/bauhaus/wassily-chair.jpg",
+    "cesca-chair": "images/bauhaus/cesca-chair.jpg",
+    "baby-cradle": "images/bauhaus/baby-cradle.jpg",
+    "bauhaus-chess-set": "images/bauhaus/bauhaus-chess-set.jpg",
+    "bauhaus-poster-1923": "images/bauhaus/bauhaus-poster-1923.jpg",
+    "universal-typeface": "images/bauhaus/universal-typeface.jpg",
+    "ship-building-game": "images/bauhaus/ship-building-game.jpg",
+    "wagenfeld-lamp": "images/bauhaus/wagenfeld-lamp.jpg",
+    "haus-am-horn": "images/bauhaus/haus-am-horn.jpg"
+  },
+  "wiki": {
+    "wassily-chair": "https://en.wikipedia.org/wiki/Wassily_Chair",
+    "cesca-chair": "https://en.wikipedia.org/wiki/Cesca_Chair",
+    "baby-cradle": "https://en.wikipedia.org/wiki/Peter_Keler",
+    "bauhaus-chess-set": "https://en.wikipedia.org/wiki/Josef_Hartwig",
+    "bauhaus-poster-1923": "https://en.wikipedia.org/wiki/Joost_Schmidt",
+    "universal-typeface": "https://en.wikipedia.org/wiki/Herbert_Bayer",
+    "ship-building-game": "https://en.wikipedia.org/wiki/Alma_Siedhoff-Buscher",
+    "wagenfeld-lamp": "https://en.wikipedia.org/wiki/Wilhelm_Wagenfeld",
+    "haus-am-horn": "https://en.wikipedia.org/wiki/Haus_am_Horn"
+  }
+}

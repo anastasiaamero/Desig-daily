@@ -850,21 +850,6 @@
         // Initialize on first tap anywhere
         document.addEventListener('click', requestOrientationPermission, { once: true });
         
-        // Navigation handlers with gamma reset
-        function handleNav() {
-            initialGamma = null;
-        }
-        
-        tapPrev.addEventListener('click', () => {
-            prevWork();
-            handleNav();
-        });
-        
-        tapNext.addEventListener('click', () => {
-            nextWork();
-            handleNav();
-        });
-        
         function nextWork() {
             currentIndex = (currentIndex + 1) % works.length;
             renderWork(currentIndex);
@@ -874,6 +859,17 @@
             currentIndex = (currentIndex - 1 + works.length) % works.length;
             renderWork(currentIndex);
         }
+        
+        // Navigation handlers with gamma reset
+        tapPrev.addEventListener('click', () => {
+            prevWork();
+            initialGamma = null;
+        });
+        
+        tapNext.addEventListener('click', () => {
+            nextWork();
+            initialGamma = null;
+        });
         
         document.getElementById('nextBtn').addEventListener('click', nextWork);
         

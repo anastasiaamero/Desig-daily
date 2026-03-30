@@ -255,6 +255,10 @@
         
         .wiki-link:hover { text-decoration: underline; }
         
+        .title, .description, .year-category {
+            transition: opacity 0.3s ease;
+        }
+        
         /* Bottom Bar */
         .bottom-bar {
             padding: 2rem 0 1rem;
@@ -671,58 +675,76 @@
         
         async function renderWork(index) {
             const work = works[index];
-            workTitle.textContent = work.title;
-            workDescription.textContent = lang === 'en' ? work.description : work.description_ru;
-            workYear.textContent = work.year;
-            workCategory.textContent = work.category.replace(/\s/g, '');
+            
+            workTitle.style.opacity = '0';
+            workDescription.style.opacity = '0';
+            workYear.style.opacity = '0';
+            workCategory.style.opacity = '0';
+            wikiExtract.classList.remove('visible');
             
             cardImg.classList.remove('loaded');
             cardPlaceholder.textContent = work.title[0];
             
-            let imageSrc = localImages[work.title] || null;
-            let wikiExtractText = '';
+            const imageSrc = localImages[work.title] || null;
             
-            try {
-                const response = await fetch(`https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(work.wikiSearch)}&prop=extracts&exintro=1&explaintext=1&format=json&origin=*`);
-                const data = await response.json();
-                const pages = data.query?.pages;
-                if (pages) {
-                    for (const pageId in pages) {
-                        const page = pages[pageId];
-                        if (pageId !== '-1' && page.extract) {
-                            wikiExtractText = page.extract.length > 400 
-                                ? page.extract.substring(0, 400) + '...' 
-                                : page.extract;
-                            wikiLink.href = `https://en.wikipedia.org/wiki/${encodeURIComponent(page.title)}`;
-                            break;
+            function showText() {
+                workTitle.textContent = work.title;
+                workDescription.textContent = lang === 'en' ? work.description : work.description_ru;
+                workYear.textContent = work.year;
+                workCategory.textContent = work.category.replace(/\s/g, '');
+                
+                workTitle.style.opacity = '1';
+                workDescription.style.opacity = '1';
+                workYear.style.opacity = '1';
+                workCategory.style.opacity = '1';
+                
+                let wikiExtractText = '';
+                
+                try {
+                    const response = await fetch(`https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(work.wikiSearch)}&prop=extracts&exintro=1&explaintext=1&format=json&origin=*`);
+                    const data = await response.json();
+                    const pages = data.query?.pages;
+                    if (pages) {
+                        for (const pageId in pages) {
+                            const page = pages[pageId];
+                            if (pageId !== '-1' && page.extract) {
+                                wikiExtractText = page.extract.length > 400 
+                                    ? page.extract.substring(0, 400) + '...' 
+                                    : page.extract;
+                                wikiLink.href = `https://en.wikipedia.org/wiki/${encodeURIComponent(page.title)}`;
+                                break;
+                            }
                         }
                     }
+                } catch (error) {
+                    console.warn('Wikipedia fetch failed:', error);
                 }
-            } catch (error) {
-                console.warn('Wikipedia fetch failed:', error);
-            }
-            
-            if (localImages[work.title]) {
-                imageSrc = localImages[work.title];
-            }
-            
-            if (wikiExtractText) {
-                wikiText.textContent = wikiExtractText;
-                wikiExtract.classList.add('visible');
-            } else if (work.wiki) {
-                const wikiShort = work.wiki.length > 400 ? work.wiki.substring(0, 400) + '...' : work.wiki;
-                wikiText.textContent = wikiShort;
-                wikiExtract.classList.add('visible');
-            } else {
-                wikiExtract.classList.remove('visible');
+                
+                if (wikiExtractText) {
+                    wikiText.textContent = wikiExtractText;
+                    wikiExtract.classList.add('visible');
+                } else if (work.wiki) {
+                    const wikiShort = work.wiki.length > 400 ? work.wiki.substring(0, 400) + '...' : work.wiki;
+                    wikiText.textContent = wikiShort;
+                    wikiExtract.classList.add('visible');
+                }
             }
             
             if (imageSrc) {
                 cardImg.src = imageSrc;
-                cardImg.onload = () => cardImg.classList.add('loaded');
-                cardImg.onerror = () => cardPlaceholder.textContent = work.title[0];
+                cardImg.onload = () => {
+                    cardImg.classList.add('loaded');
+                    showText();
+                };
+                cardImg.onerror = () => {
+                    cardPlaceholder.textContent = work.title[0];
+                    cardImg.classList.add('loaded');
+                    showText();
+                };
             } else {
                 cardPlaceholder.textContent = work.title[0];
+                cardImg.classList.add('loaded');
+                showText();
             }
         }
         

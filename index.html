@@ -149,6 +149,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            perspective: 1000px;
+            cursor: grab;
+            user-select: none;
+        }
+        
+        .card-image:active {
+            cursor: grabbing;
+        }
+        
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
         }
         
         .card-image img {
@@ -748,10 +762,111 @@
         document.getElementById('menuBtn').addEventListener('click', toggleMenu);
         document.getElementById('menuBtnOverlay').addEventListener('click', toggleMenu);
         
-        document.getElementById('nextBtn').addEventListener('click', () => {
+        // 3D Card Swipe
+        const cardImage = document.getElementById('cardImage');
+        const cardInner = document.querySelector('.card-inner');
+        let startX = 0;
+        let startY = 0;
+        let currentRotateX = 0;
+        let currentRotateY = 0;
+        let isDragging = false;
+        
+        if (cardImage && !cardInner) {
+            cardImage.innerHTML = '<div class="card-inner">' + cardImage.innerHTML + '</div>';
+        }
+        
+        cardImage.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            isDragging = true;
+            const inner = cardImage.querySelector('.card-inner');
+            if (inner) {
+                inner.style.transition = 'none';
+            }
+        }, { passive: true });
+        
+        cardImage.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            
+            const currentX = e.touches[0].clientX;
+            const currentY = e.touches[0].clientY;
+            const deltaX = currentX - startX;
+            const deltaY = currentY - startY;
+            
+            const rotateY = deltaX / 5;
+            const rotateX = -deltaY / 5;
+            
+            const inner = cardImage.querySelector('.card-inner');
+            if (inner) {
+                inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            }
+        }, { passive: true });
+        
+        cardImage.addEventListener('touchend', (e) => {
+            isDragging = false;
+            const deltaX = e.changedTouches[0].clientX - startX;
+            const deltaY = e.changedTouches[0].clientY - startY;
+            
+            const inner = cardImage.querySelector('.card-inner');
+            if (inner) {
+                inner.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                inner.style.transform = 'rotateX(0deg) rotateY(0deg)';
+            }
+            
+            if (Math.abs(deltaX) > 80) {
+                if (deltaX > 0) {
+                    prevWork();
+                } else {
+                    nextWork();
+                }
+            }
+        });
+        
+        // Mouse drag for desktop
+        let mouseStartX = 0;
+        cardImage.addEventListener('mousedown', (e) => {
+            mouseStartX = e.clientX;
+            isDragging = true;
+            const inner = cardImage.querySelector('.card-inner');
+            if (inner) {
+                inner.style.transition = 'none';
+            }
+        });
+        
+        cardImage.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            
+            const deltaX = e.clientX - mouseStartX;
+            const rotateY = deltaX / 5;
+            
+            const inner = cardImage.querySelector('.card-inner');
+            if (inner) {
+                inner.style.transform = `rotateY(${rotateY}deg)`;
+            }
+        });
+        
+        document.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                const inner = cardImage.querySelector('.card-inner');
+                if (inner) {
+                    inner.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    inner.style.transform = 'rotateY(0deg)';
+                }
+            }
+        });
+        
+        function nextWork() {
             currentIndex = (currentIndex + 1) % works.length;
             renderWork(currentIndex);
-        });
+        }
+        
+        function prevWork() {
+            currentIndex = (currentIndex - 1 + works.length) % works.length;
+            renderWork(currentIndex);
+        }
+        
+        document.getElementById('nextBtn').addEventListener('click', nextWork);
         
         document.querySelectorAll('.lang-toggle').forEach(btn => {
             btn.addEventListener('click', () => {

@@ -162,12 +162,13 @@
         
         /* Title */
         .title {
-            font-weight: 700;
+            font-weight: 900;
             font-size: 2rem;
             line-height: 1.1;
-            letter-spacing: 0.05em;
+            letter-spacing: -0.01em;
             text-transform: uppercase;
             margin-bottom: 1rem;
+            -webkit-text-stroke: 0.5px var(--fg);
         }
         
         .description {
@@ -185,7 +186,6 @@
             color: var(--muted);
             padding-top: 1rem;
             margin-top: 1rem;
-            border-top: 1px solid var(--fg);
             margin-bottom: 2rem;
             display: none;
         }
@@ -281,6 +281,19 @@
         
         .menu-btn svg { width: 1.5rem; height: 1.5rem; color: var(--fg); }
         
+        .menu-btn-light {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.25rem;
+            height: 2.25rem;
+        }
+        
+        .menu-btn-light svg { color: white; }
+        
         .lang-toggle {
             font-weight: 700;
             font-size: 16px;
@@ -288,6 +301,10 @@
             border: none;
             cursor: pointer;
             color: var(--fg);
+        }
+        
+        .lang-toggle-light {
+            color: white;
         }
         
         /* Menu Overlay */
@@ -316,26 +333,13 @@
             border-bottom: 1px solid rgba(255,255,255,0.2);
         }
         
-        .menu-close {
-            width: 2.25rem;
-            height: 2.25rem;
-            border-radius: 50%;
-            background: white;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .menu-close svg { width: 1.25rem; height: 1.25rem; color: black; }
-        
         .menu-title {
             font-weight: 700;
             font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             color: white;
+            text-align: right;
         }
         
         .menu-content {
@@ -360,6 +364,20 @@
             text-align: left;
             font-family: inherit;
             width: 100%;
+            perspective: 1000px;
+        }
+        
+        .menu-item-inner {
+            display: flex;
+            gap: 1rem;
+            background: none;
+            width: 100%;
+            transition: transform 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .menu-item:hover .menu-item-inner {
+            transform: translateZ(20px) rotateX(5deg);
         }
         
         .menu-item-image {
@@ -442,7 +460,7 @@
     <!-- Header -->
     <div class="header">
         <button class="menu-btn" id="menuBtn" aria-label="Menu">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
                 <line x1="3" y1="6" x2="21" y2="6"/>
                 <line x1="3" y1="18" x2="21" y2="18"/>
             </svg>
@@ -472,7 +490,7 @@
             </div>
             <button class="next-btn" id="nextBtn" aria-label="Next work">
                 <svg viewBox="0 0 32 22" fill="none">
-                    <path d="M0 11H30M22 1L31 11L22 21" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M0 11H30M22 1L31 11L22 21" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </button>
         </div>
@@ -481,13 +499,13 @@
     <!-- Menu Overlay -->
     <div class="menu-overlay" id="menuOverlay">
         <div class="menu-header">
-            <span class="menu-title" id="menuTitle">All Works</span>
-            <button class="menu-close" id="menuClose" aria-label="Close menu">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18"/>
-                    <line x1="6" y1="6" x2="18" y2="18"/>
+            <button class="menu-btn menu-btn-light" id="menuBtnOverlay" aria-label="Menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="3">
+                    <line x1="3" y1="6" x2="21" y2="6" stroke="white"/>
+                    <line x1="3" y1="18" x2="21" y2="18" stroke="white"/>
                 </svg>
             </button>
+            <button class="lang-toggle lang-toggle-light" id="langToggle">En/Ru</button>
         </div>
         <div class="menu-content">
             <div class="menu-grid" id="menuList"></div>
@@ -496,7 +514,6 @@
     
     <script>
         const works = [
-            { id: 1, title: "Map of the World", artist: "Paula Scher", year: 1994, category: "Graphic Design", wikiSearch: "Paula Scher", description: "Iconic hand-drawn style world map for The New York Times Magazine. Transformed geographic data into visual poetry.", description_ru: "Культовая карта мира для The New York Times Magazine. Превратила географические данные в визуальную поэзию." },
             { id: 2, title: "Neue Haas Grotesk", artist: "Max Miedinger", year: 1957, category: "Typography", wikiSearch: "Helvetica", description: "The typeface that would later become Helvetica. A masterpiece of Swiss design.", description_ru: "Шрифт, который позже станет Helvetica. Шедевр швейцарского дизайна." },
             { id: 3, title: "Eames Lounge Chair", artist: "Charles & Ray Eames", year: 1956, category: "Product Design", wikiSearch: "Eames Lounge Chair", description: "The perfect marriage of form and function. Revolutionized furniture design.", description_ru: "Идеальное сочетание формы и функции. Революция в дизайне мебели." },
             { id: 4, title: "Vitra Fire Station", artist: "Zaha Hadid", year: 1993, category: "Architecture", wikiSearch: "Vitra Fire Station", description: "Hadid's first completed building. A dramatic concrete structure.", description_ru: "Первое завершённое здание Хадид. Драматическая бетонная конструкция." },
@@ -533,7 +550,6 @@
         const wikiLink = document.getElementById('wikiLink');
         const menuOverlay = document.getElementById('menuOverlay');
         const menuList = document.getElementById('menuList');
-        const menuTitle = document.getElementById('menuTitle');
         const splash = document.getElementById('splash');
         const splashText = document.getElementById('splashText');
         const cards3d = document.getElementById('cards3d');
@@ -541,7 +557,6 @@
         const imageCache = {};
         
         const localImages = {
-            'Map of the World': 'images/paula-scher.jpg',
             'Neue Haas Grotesk': 'images/helvetica.jpg',
             'Eames Lounge Chair': 'images/eames.jpg',
             'Vitra Fire Station': 'images/vitra-fire-station.jpg',
@@ -650,17 +665,18 @@
         }
         
         function renderMenu() {
-            menuTitle.textContent = lang === 'en' ? 'All Works' : 'Все работы';
             menuList.innerHTML = works.map((work, index) => `
                 <button class="menu-item" data-index="${index}">
-                    <div class="menu-item-image">
-                        <img src="${localImages[work.title] || imageCache[work.wikiSearch]?.image || ''}" alt="" loading="lazy" onload="this.classList.add('loaded')">
-                        <div class="menu-item-placeholder">${work.title[0]}</div>
-                    </div>
-                    <div class="menu-item-info">
-                        <span class="menu-item-num">${String(index + 1).padStart(2, '0')}</span>
-                        <p class="menu-item-title">${work.title}</p>
-                        <p class="menu-item-meta">${work.artist}, ${work.year}</p>
+                    <div class="menu-item-inner">
+                        <div class="menu-item-image">
+                            <img src="${localImages[work.title] || imageCache[work.wikiSearch]?.image || ''}" alt="" loading="lazy" onload="this.classList.add('loaded')">
+                            <div class="menu-item-placeholder">${work.title[0]}</div>
+                        </div>
+                        <div class="menu-item-info">
+                            <span class="menu-item-num">${String(index + 1).padStart(2, '0')}</span>
+                            <p class="menu-item-title">${work.title}</p>
+                            <p class="menu-item-meta">${work.artist}, ${work.year}</p>
+                        </div>
                     </div>
                 </button>
             `).join('');
@@ -684,23 +700,56 @@
             menuOpen = !menuOpen;
             menuOverlay.classList.toggle('active', menuOpen);
             document.body.style.overflow = menuOpen ? 'hidden' : '';
+            document.querySelector('.header').style.display = menuOpen ? 'none' : 'flex';
             
-            if (menuOpen) renderMenu();
+            if (menuOpen) {
+                renderMenu();
+                init3DHover();
+            }
+        }
+        
+        function init3DHover() {
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.addEventListener('mousemove', (e) => {
+                    const rect = item.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 15;
+                    const rotateY = (x - centerX) / 15;
+                    
+                    const inner = item.querySelector('.menu-item-inner');
+                    if (inner) {
+                        inner.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(30px) translateX(10px)`;
+                    }
+                });
+                
+                item.addEventListener('mouseleave', () => {
+                    const inner = item.querySelector('.menu-item-inner');
+                    if (inner) {
+                        inner.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0) translateX(0)';
+                    }
+                });
+            });
         }
         
         document.getElementById('menuBtn').addEventListener('click', toggleMenu);
-        document.getElementById('menuClose').addEventListener('click', toggleMenu);
+        document.getElementById('menuBtnOverlay').addEventListener('click', toggleMenu);
         
         document.getElementById('nextBtn').addEventListener('click', () => {
             currentIndex = (currentIndex + 1) % works.length;
             renderWork(currentIndex);
         });
         
-        document.getElementById('langToggle').addEventListener('click', () => {
-            lang = lang === 'en' ? 'ru' : 'en';
-            document.getElementById('langToggle').textContent = lang === 'en' ? 'En/Ru' : 'Ru/En';
-            renderWork(currentIndex);
-            if (menuOpen) renderMenu();
+        document.querySelectorAll('.lang-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                lang = lang === 'en' ? 'ru' : 'en';
+                const newText = lang === 'en' ? 'En/Ru' : 'Ru/En';
+                document.querySelectorAll('.lang-toggle').forEach(b => b.textContent = newText);
+                renderWork(currentIndex);
+                if (menuOpen) renderMenu();
+            });
         });
         
         function typewriterEffect(element, text, callback) {

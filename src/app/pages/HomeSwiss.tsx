@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { getTodaysWork, works } from "../data/works";
-import { X, ArrowRight, Menu } from "lucide-react";
+import { ArrowRight, Menu } from "lucide-react";
 import svgPaths from "../../imports/svg-hnp1vz6cdf";
 
 export function HomeSwiss() {
@@ -28,13 +28,15 @@ export function HomeSwiss() {
       <div className="fixed top-0 left-0 right-0 z-50 bg-background">
         <div className="max-w-md mx-auto px-4 py-4 flex items-center justify-between">
           {/* Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="w-9 h-9 rounded-full bg-foreground flex items-center justify-center"
-            aria-label="Menu"
-          >
-            <Menu className="w-5 h-5 text-background" strokeWidth={2} />
-          </button>
+          {!isMenuOpen && (
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="w-9 h-9 rounded-full bg-foreground flex items-center justify-center"
+              aria-label="Menu"
+            >
+              <Menu className="w-5 h-5 text-background" strokeWidth={2} />
+            </button>
+          )}
 
           {/* Language Toggle */}
           <button
@@ -131,14 +133,7 @@ export function HomeSwiss() {
       {isMenuOpen && (
         <div className="fixed inset-0 bg-background z-40 flex items-center justify-center">
           <div className="max-w-md w-full px-8">
-            <button
-              onClick={() => setIsMenuOpen(false)}
-              className="absolute top-4 right-4 w-12 h-12 flex items-center justify-center"
-            >
-              <X className="w-6 h-6" strokeWidth={2} />
-            </button>
-
-            <nav className="space-y-6">
+              <nav className="space-y-6">
               {works.map((work, index) => (
                 <button
                   key={work.id}

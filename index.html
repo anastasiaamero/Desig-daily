@@ -155,16 +155,8 @@
         .card-inner {
             width: 100%;
             height: 100%;
-            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: transform 0.1s ease-out;
             transform-style: preserve-3d;
-        }
-        
-        .card-inner.hover-left {
-            transform: perspective(1000px) rotateY(15deg);
-        }
-        
-        .card-inner.hover-right {
-            transform: perspective(1000px) rotateY(-15deg);
         }
         
         .card-image img {
@@ -811,36 +803,32 @@
         tapPrev.addEventListener('click', prevWork);
         tapNext.addEventListener('click', nextWork);
         
-        // Hover effect on card
-        tapPrev.addEventListener('mouseenter', () => {
-            if (cardInner) cardInner.classList.add('hover-left');
-        });
-        tapPrev.addEventListener('mouseleave', () => {
-            if (cardInner) cardInner.classList.remove('hover-left');
-        });
+        // Device orientation for 3D effect
+        let initialGamma = null;
         
-        tapNext.addEventListener('mouseenter', () => {
-            if (cardInner) cardInner.classList.add('hover-right');
-        });
-        tapNext.addEventListener('mouseleave', () => {
-            if (cardInner) cardInner.classList.remove('hover-right');
-        });
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', (e) => {
+                if (e.gamma !== null && e.gamma !== undefined) {
+                    if (initialGamma === null) {
+                        initialGamma = e.gamma;
+                    }
+                    
+                    const delta = e.gamma - initialGamma;
+                    const rotateY = Math.max(-15, Math.min(15, delta));
+                    
+                    if (cardInner) {
+                        cardInner.style.transform = `perspective(1000px) rotateY(${rotateY}deg)`;
+                    }
+                }
+            });
+        }
         
-        // Touch events for mobile
-        tapPrev.addEventListener('touchstart', () => {
-            if (cardInner) cardInner.classList.add('hover-left');
+        // Reset on tap
+        tapPrev.addEventListener('click', () => {
+            initialGamma = null;
         });
-        tapPrev.addEventListener('touchend', () => {
-            if (cardInner) cardInner.classList.remove('hover-left');
-            prevWork();
-        });
-        
-        tapNext.addEventListener('touchstart', () => {
-            if (cardInner) cardInner.classList.add('hover-right');
-        });
-        tapNext.addEventListener('touchend', () => {
-            if (cardInner) cardInner.classList.remove('hover-right');
-            nextWork();
+        tapNext.addEventListener('click', () => {
+            initialGamma = null;
         });
         
         function nextWork() {

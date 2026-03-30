@@ -496,8 +496,10 @@
     <!-- Main -->
     <main class="main">
         <div class="card-image" id="cardImage">
-            <img id="cardImg" alt="">
-            <div class="card-placeholder" id="cardPlaceholder"></div>
+            <div class="card-inner">
+                <img id="cardImg" alt="">
+                <div class="card-placeholder" id="cardPlaceholder"></div>
+            </div>
         </div>
         
         <h1 class="title" id="workTitle"></h1>
@@ -764,16 +766,9 @@
         
         // 3D Card Swipe
         const cardImage = document.getElementById('cardImage');
-        const cardInner = document.querySelector('.card-inner');
         let startX = 0;
         let startY = 0;
-        let currentRotateX = 0;
-        let currentRotateY = 0;
         let isDragging = false;
-        
-        if (cardImage && !cardInner) {
-            cardImage.innerHTML = '<div class="card-inner">' + cardImage.innerHTML + '</div>';
-        }
         
         cardImage.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;

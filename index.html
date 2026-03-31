@@ -817,7 +817,9 @@
         tapNext.addEventListener('click', nextWork);
         
         wikiLink.addEventListener('click', (e) => {
+            e.preventDefault();
             e.stopPropagation();
+            window.open(wikiLink.href, '_blank');
         });
         
         document.getElementById('nextBtn').addEventListener('click', nextWork);

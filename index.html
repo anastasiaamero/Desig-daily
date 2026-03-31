@@ -169,36 +169,6 @@
         
         .card-image img.loaded { opacity: 1; }
         
-        /* Tap Zones */
-        .tap-zones {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            display: flex;
-            pointer-events: none;
-            z-index: 10;
-        }
-        
-        .tap-zone {
-            pointer-events: auto;
-            flex: 1;
-        }
-        
-        .tap-zone.prev {
-            flex: 0 0 30%;
-        }
-        
-        .tap-zone.next {
-            flex: 0 0 30%;
-        }
-        
-        .tap-zone.center {
-            flex: 1;
-            pointer-events: none;
-        }
-        
         .card-placeholder {
             position: absolute;
             inset: 0;
@@ -547,12 +517,7 @@
         </div>
     </main>
     
-    <!-- Tap Zones -->
-    <div class="tap-zones">
-        <div class="tap-zone prev" id="tapPrev"></div>
-        <div class="tap-zone center"></div>
-        <div class="tap-zone next" id="tapNext"></div>
-    </div>
+
     
     <!-- Menu Overlay -->
     <div class="menu-overlay" id="menuOverlay">
@@ -799,10 +764,6 @@
         document.getElementById('menuBtn').addEventListener('click', toggleMenu);
         document.getElementById('menuBtnOverlay').addEventListener('click', toggleMenu);
         
-        // Tap zones for navigation
-        const tapPrev = document.getElementById('tapPrev');
-        const tapNext = document.getElementById('tapNext');
-        
         function nextWork() {
             currentIndex = (currentIndex + 1) % works.length;
             renderWork(currentIndex);
@@ -812,9 +773,6 @@
             currentIndex = (currentIndex - 1 + works.length) % works.length;
             renderWork(currentIndex);
         }
-        
-        tapPrev.addEventListener('click', prevWork);
-        tapNext.addEventListener('click', nextWork);
         
         wikiLink.addEventListener('click', (e) => {
             e.preventDefault();

@@ -27,7 +27,6 @@
             font-size: 16px;
             line-height: 1.5;
             overflow-x: hidden;
-            padding-bottom: 20px;
         }
         
         html {
@@ -132,9 +131,27 @@
         
         /* Main Scroll Section */
         .main {
-            padding: 3.5rem 1rem 0;
+            min-height: 100dvh;
+            padding: 3.5rem 1rem 1rem;
             max-width: 28rem;
             margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .main > .card-image,
+        .main > .title,
+        .main > .description,
+        .main > .wiki-extract {
+            flex-shrink: 0;
+        }
+        
+        .bottom-bar {
+            margin-top: auto;
+            padding: 0.5rem 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         /* Card */
@@ -227,14 +244,6 @@
         }
         
         .wiki-link:hover { text-decoration: underline; }
-        
-        /* Bottom Bar */
-        .bottom-bar {
-            padding: 0.5rem 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
         
         .bottom-left {
             display: flex;

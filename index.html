@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
         
         :root {
             --bg: #ffffff;
@@ -132,14 +133,23 @@
         
         /* Main Scroll Section */
         .main {
-            padding: 60px 16px 20px;
+            padding: 60px 16px 0;
             max-width: 28rem;
             margin: 0 auto;
             width: 100%;
         }
         
         .bottom-bar {
-            padding-top: 8px;
+            padding: 0;
+            margin-top: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .bottom-bar {
+            padding: 0;
+            margin-top: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;

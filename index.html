@@ -134,13 +134,12 @@
         
         /* Main Scroll Section */
         .main {
-            height: 100dvh;
+            min-height: 100dvh;
             padding: 3.5rem 1rem 0.5rem;
             max-width: 28rem;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
         }
         
         /* Card */
@@ -641,7 +640,7 @@
             { id: 20, title: "Dieter Rams Principles", artist: "Dieter Rams", year: 1970, category: "Graphic Design", wikiSearch: "Dieter Rams", description: "Ten principles for good design.", description_ru: "Десять принципов хорошего дизайна.", wiki: "Dieter Rams formulated his ten principles for good design while working at Braun. These principles, including 'good design is as little design as possible' and 'good design is honest', became influential guidelines for designers worldwide and have been widely cited in discussions about minimalist and functional design." }
         ];
         
-        let currentIndex = 0;
+        let currentIndex = Math.floor(Math.random() * works.length);
         let lang = 'en';
         let menuOpen = false;
         
@@ -850,6 +849,15 @@
             currentIndex = (currentIndex + 1) % works.length;
             renderWork(currentIndex);
         }
+
+        function randomWork() {
+            let newIndex = Math.floor(Math.random() * works.length);
+            while (newIndex === currentIndex && works.length > 1) {
+                newIndex = Math.floor(Math.random() * works.length);
+            }
+            currentIndex = newIndex;
+            renderWork(currentIndex);
+        }
         
         function prevWork() {
             currentIndex = (currentIndex - 1 + works.length) % works.length;
@@ -862,7 +870,7 @@
             window.open(wikiLink.href, '_blank');
         });
         
-        document.getElementById('nextBtn').addEventListener('click', nextWork);
+        document.getElementById('nextBtn').addEventListener('click', randomWork);
         
         document.querySelectorAll('.lang-toggle').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -929,13 +937,14 @@
 
         function startApp() {
             splashRoulette.classList.add('hidden');
+            randomWork();
         }
 
         splashLoader.addEventListener('click', hideLoader);
         splashRoulette.addEventListener('click', startApp);
 
         initSplash();
-        renderWork(0);
+        renderWork(currentIndex);
     </script>
 </body>
 </html>

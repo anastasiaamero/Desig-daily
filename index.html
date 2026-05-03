@@ -131,17 +131,26 @@
         
         /* Main Scroll Section */
         .main {
-            padding: 60px 16px 0;
+            padding: 60px 16px 80px;
             max-width: 28rem;
             margin: 0 auto;
             width: 100%;
         }
         
         .bottom-bar {
-            padding: 8px 0 0;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 12px 16px;
+            max-width: 28rem;
+            margin: 0 auto;
+            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: var(--bg);
+            z-index: 10;
         }
         
         /* Card */

@@ -4,19 +4,22 @@ import { Menu } from "lucide-react";
 import svgPaths from "../../imports/svg-hnp1vz6cdf";
 
 export function HomeSwiss() {
-  const [currentIndex, setCurrentIndex] = useState(() => Math.floor(Math.random() * works.length));
+  const getRandomIndex = () => Math.floor(Math.random() * works.length);
+  const [currentIndex, setCurrentIndex] = useState(getRandomIndex);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [language, setLanguage] = useState<"En" | "Ru">("En");
   const [hasStarted, setHasStarted] = useState(false);
+  const [randomKey, setRandomKey] = useState(Date.now());
 
   const currentWork = works[currentIndex];
 
   const randomWork = () => {
-    let newIndex: number;
-    do {
+    let newIndex = Math.floor(Math.random() * works.length);
+    while (newIndex === currentIndex && works.length > 1) {
       newIndex = Math.floor(Math.random() * works.length);
-    } while (newIndex === currentIndex && works.length > 1);
+    }
     setCurrentIndex(newIndex);
+    setRandomKey(Date.now());
   };
 
   const toggleLanguage = () => {
@@ -24,7 +27,7 @@ export function HomeSwiss() {
   };
 
   return (
-    <div className="min-h-screen bg-background relative flex flex-col">
+    <div key={randomKey} className="min-h-screen bg-background relative flex flex-col">
       {/* Header */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-background">
         <div className="max-w-md mx-auto px-4 py-4 flex items-center justify-between">

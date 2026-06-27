@@ -802,53 +802,6 @@
         // Tap zones for navigation
         const tapPrev = document.getElementById('tapPrev');
         const tapNext = document.getElementById('tapNext');
-        const cardInner = document.querySelector('.card-inner');
-        
-        // Device orientation for 3D effect
-        let initialGamma = null;
-        let orientationEnabled = false;
-        
-        function enableOrientation() {
-            if (orientationEnabled) return;
-            orientationEnabled = true;
-            
-            window.addEventListener('deviceorientation', (e) => {
-                if (e.gamma !== null && e.gamma !== undefined) {
-                    if (initialGamma === null) {
-                        initialGamma = e.gamma;
-                    }
-                    
-                    const delta = e.gamma - initialGamma;
-                    const rotateY = Math.max(-15, Math.min(15, delta));
-                    
-                    if (cardInner) {
-                        cardInner.style.transform = `perspective(1000px) rotateY(${rotateY}deg)`;
-                    }
-                }
-            });
-        }
-        
-        // iOS 13+ requires permission
-        async function requestOrientationPermission() {
-            if (orientationEnabled) return;
-            
-            if (typeof DeviceOrientationEvent !== 'undefined' && 
-                typeof DeviceOrientationEvent.requestPermission === 'function') {
-                try {
-                    const permission = await DeviceOrientationEvent.requestPermission();
-                    if (permission === 'granted') {
-                        enableOrientation();
-                    }
-                } catch (e) {
-                    console.warn('Device orientation permission denied:', e);
-                }
-            } else if (window.DeviceOrientationEvent) {
-                enableOrientation();
-            }
-        }
-        
-        // Initialize on first tap anywhere
-        document.addEventListener('click', requestOrientationPermission, { once: true });
         
         function nextWork() {
             currentIndex = (currentIndex + 1) % works.length;
@@ -860,15 +813,11 @@
             renderWork(currentIndex);
         }
         
-        // Navigation handlers with gamma reset
-        tapPrev.addEventListener('click', () => {
-            prevWork();
-            initialGamma = null;
-        });
+        tapPrev.addEventListener('click', prevWork);
+        tapNext.addEventListener('click', nextWork);
         
-        tapNext.addEventListener('click', () => {
-            nextWork();
-            initialGamma = null;
+        wikiLink.addEventListener('click', (e) => {
+            e.stopPropagation();
         });
         
         document.getElementById('nextBtn').addEventListener('click', nextWork);

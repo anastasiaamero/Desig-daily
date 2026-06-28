@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
         
         :root {
             --bg: #ffffff;
@@ -18,8 +19,7 @@
         
         html {
             background: var(--bg);
-            min-height: 100%;
-            min-height: 100dvh;
+            overflow-x: hidden;
         }
         
         body {
@@ -28,8 +28,7 @@
             color: var(--fg);
             font-size: 16px;
             line-height: 1.5;
-            min-height: 100%;
-            min-height: 100dvh;
+            overflow-x: hidden;
         }
         
         html {
@@ -56,9 +55,7 @@
         }
         
         .splash.hidden {
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
+            display: none;
         }
         
         .splash-text {
@@ -134,22 +131,36 @@
         
         /* Main Scroll Section */
         .main {
-            min-height: 100dvh;
-            padding: 5rem 1rem 2rem;
+            padding: 60px 16px 80px;
             max-width: 28rem;
             margin: 0 auto;
+            width: 100%;
+        }
+        
+        .bottom-bar {
+            position: fixed;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            padding: 0 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 50;
         }
         
         /* Card */
         .card-image {
-            aspect-ratio: 4/5;
-            margin-bottom: 1rem;
+            aspect-ratio: 4/3;
+            max-height: 35vh;
+            margin-bottom: 0.5rem;
             position: relative;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
             perspective: 1000px;
+            flex-shrink: 0;
         }
         
         .card-inner {
@@ -169,36 +180,6 @@
         
         .card-image img.loaded { opacity: 1; }
         
-        /* Tap Zones */
-        .tap-zones {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            display: flex;
-            pointer-events: none;
-            z-index: 10;
-        }
-        
-        .tap-zone {
-            pointer-events: auto;
-            flex: 1;
-        }
-        
-        .tap-zone.prev {
-            flex: 0 0 30%;
-        }
-        
-        .tap-zone.next {
-            flex: 0 0 30%;
-        }
-        
-        .tap-zone.center {
-            flex: 1;
-            pointer-events: none;
-        }
-        
         .card-placeholder {
             position: absolute;
             inset: 0;
@@ -212,33 +193,33 @@
         
         .card-image img.loaded + .card-placeholder { display: none; }
         
-        /* Title */
         .title {
             font-weight: 900;
-            font-size: 2rem;
+            font-size: 1.75rem;
             line-height: 1.1;
             letter-spacing: -0.01em;
             text-transform: uppercase;
-            margin-bottom: 1rem;
+            margin-bottom: 0.25rem;
             -webkit-text-stroke: 0.5px var(--fg);
+            flex-shrink: 0;
         }
-        
+
         .description {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 500;
-            line-height: 1.5;
-            margin-bottom: 1rem;
+            line-height: 1.3;
+            margin-bottom: 0.25rem;
+            flex-shrink: 0;
         }
         
         /* Wiki extract */
         .wiki-extract {
             font-size: 14px;
             font-weight: 400;
-            line-height: 1.6;
+            line-height: 1.4;
             color: var(--muted);
-            padding-top: 1rem;
-            margin-top: 1rem;
-            margin-bottom: 2rem;
+            margin-top: 0.75rem;
+            margin-bottom: 0.5rem;
             display: none;
         }
         
@@ -255,14 +236,6 @@
         
         .wiki-link:hover { text-decoration: underline; }
         
-        /* Bottom Bar */
-        .bottom-bar {
-            padding: 2rem 0 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-        
         .bottom-left {
             display: flex;
             flex-direction: column;
@@ -270,7 +243,7 @@
         
         .year-category {
             font-weight: 700;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             line-height: 1.1;
             text-transform: uppercase;
             letter-spacing: 0.02em;
@@ -279,10 +252,10 @@
             color: var(--fg);
             display: block;
         }
-        
+
         .year-category:hover { opacity: 0.7; }
-        
-        .category { margin-bottom: 0.25rem; }
+
+        .category { margin-bottom: 0; }
         
         .next-btn {
             width: 3rem;
@@ -310,6 +283,7 @@
             z-index: 50;
             padding: 1rem;
             padding-top: max(1rem, env(safe-area-inset-top));
+            background: var(--bg);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -486,12 +460,74 @@
             color: rgba(255,255,255,0.7);
         }
         
-        ::-webkit-scrollbar { display: none; }
+         ::-webkit-scrollbar { display: none; }
+
+        /* Splash Screen 1: Loader */
+        .splash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .splash.hidden {
+            display: none;
+        }
+
+        /* Splash Screen 2: Tap to Start */
+        .tap-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            gap: 0.5rem;
+        }
+
+        .tap-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            color: var(--fg);
+            animation: pulse 2s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+        }
+
+        .tap-subtitle {
+            font-size: 14px;
+            text-align: center;
+            color: var(--muted);
+            line-height: 1.3;
+        }
+
+        .tap-copyright {
+            position: absolute;
+            bottom: 2rem;
+            font-size: 12px;
+            text-align: center;
+            color: var(--muted);
+        }
     </style>
 </head>
 <body>
-    <!-- Splash Screen -->
-    <div class="splash" id="splash">
+    <!-- Splash Screen 1: Loader -->
+    <div class="splash" id="splashLoader">
         <div class="splash-text" id="splashText"></div>
         <div class="cards-3d" id="cards3d">
             <div class="carousel" id="carousel">
@@ -503,6 +539,15 @@
                 <div class="card-3d"><img id="card6" alt=""></div>
                 <div class="card-3d"><img id="card7" alt=""></div>
             </div>
+        </div>
+    </div>
+
+    <!-- Splash Screen 2: Tap to Start -->
+    <div class="splash hidden" id="splashRoulette">
+        <div class="tap-container">
+            <p class="tap-title">TAP HERE</p>
+            <p class="tap-subtitle">Random design<br>project</p>
+            <p class="tap-copyright">©anastasiaamero</p>
         </div>
     </div>
     
@@ -547,12 +592,7 @@
         </div>
     </main>
     
-    <!-- Tap Zones -->
-    <div class="tap-zones">
-        <div class="tap-zone prev" id="tapPrev"></div>
-        <div class="tap-zone center"></div>
-        <div class="tap-zone next" id="tapNext"></div>
-    </div>
+
     
     <!-- Menu Overlay -->
     <div class="menu-overlay" id="menuOverlay">
@@ -590,10 +630,20 @@
             { id: 17, title: "Tokyo Olympics Pictograms", artist: "Katsumi Asaba", year: 1964, category: "Graphic Design", wikiSearch: "1964 Summer Olympics pictograms", description: "The first truly modern Olympic pictograms.", description_ru: "Первые современные олимпийские пиктограммы.", wiki: "The 1964 Tokyo Olympics introduced the first systematic set of Olympic pictograms. Designed by Yoshinobu Ishihara and adapted by Yusaku Kamekura, these graphic symbols communicated sporting events across language barriers and became a model for all future Olympic Games visual identity systems." },
             { id: 18, title: "Frog Design", artist: "Hartmut Esslinger", year: 1969, category: "Product Design", wikiSearch: "frog design", description: "German precision in Silicon Valley.", description_ru: "Немецкая точность в Силиконовой долине.", wiki: "frog (short for 'Federal Republic of Germany') was founded by Hartmut Esslinger in 1969. The design studio pioneered 'deep grey' design for Apple computers in the 1980s, creating a unified visual language that influenced the tech industry's approach to industrial design." },
             { id: 19, title: "Bloomberg Businessweek", artist: "Bloomberg Design", year: 2012, category: "Editorial", wikiSearch: "Bloomberg Businessweek", description: "Bold typography and unexpected layouts.", description_ru: "Смелая типографика и неожиданные раскладки.", wiki: "Bloomberg Businessweek underwent a radical redesign in 2012 under creative director Wyeth McGowan. The new design featured oversized photography, bold typography, and unconventional layouts that broke from traditional business magazine conventions. The redesign won numerous awards and circulation increased significantly." },
-            { id: 20, title: "Dieter Rams Principles", artist: "Dieter Rams", year: 1970, category: "Graphic Design", wikiSearch: "Dieter Rams", description: "Ten principles for good design.", description_ru: "Десять принципов хорошего дизайна.", wiki: "Dieter Rams formulated his ten principles for good design while working at Braun. These principles, including 'good design is as little design as possible' and 'good design is honest', became influential guidelines for designers worldwide and have been widely cited in discussions about minimalist and functional design." }
+            { id: 20, title: "Dieter Rams Principles", artist: "Dieter Rams", year: 1970, category: "Graphic Design", wikiSearch: "Dieter Rams", description: "Ten principles for good design.", description_ru: "Десять принципов хорошего дизайна.", wiki: "Dieter Rams formulated his ten principles for good design while working at Braun. These principles, including 'good design is as little design as possible' and 'good design is honest', became influential guidelines for designers worldwide and have been widely cited in discussions about minimalist and functional design." },
+            { id: 21, title: "Olympic Rings", artist: "Pierre de Coubertin", year: 1913, category: "Graphic Design", wikiSearch: "Olympic symbols", description: "Five interlocking rings. The most recognized symbol in sports.", description_ru: "Пять переплетённых колец. Самый узнаваемый символ в спорте.", wiki: "The Olympic symbol consists of five interlocking rings of blue, yellow, black, green and red. Designed by Pierre de Coubertin in 1913, it represents the five inhabited continents united through sport." },
+            { id: 22, title: "Lampe Gras", artist: "Bernard-Albin Gras", year: 1921, category: "Product Design", wikiSearch: "Bernard-Albin Gras", description: "The lamp that inspired Le Corbusier. Raw industrial elegance.", description_ru: "Лампа, вдохновившая Ле Корбюзье. Сырая промышленная элегантность.", wiki: "Designed by Bernard-Albin Gras in 1921, the Lampe Gras features an adjustable joint mechanism without screws or welding. It became a landmark of industrial design and was favored by Le Corbusier and Mies van der Rohe." },
+            { id: 23, title: "Swiss Style Poster", artist: "Josef Müller-Brockmann", year: 1958, category: "Graphic Design", wikiSearch: "Josef Müller-Brockmann", description: "Geometric grids and mathematical beauty. Defined the Swiss International Style.", description_ru: "Геометрические сетки и математическая красота. Определил швейцарский стиль.", wiki: "Josef Müller-Brockmann was a Swiss graphic designer and a pioneer of the Swiss Style. His poster for the Zurich Town Hall in 1955 and his Beethoven poster of 1958 exemplify his rigorous use of grid systems and geometric forms." },
+            { id: 24, title: "Centre Pompidou", artist: "Renzo Piano & Richard Rogers", year: 1977, category: "Architecture", wikiSearch: "Centre Pompidou", description: "Inside-out building. Pipes on the outside, art on the inside.", description_ru: "Здание наизнанку. Трубы снаружи, искусство внутри.", wiki: "The Centre Pompidou in Paris, designed by Renzo Piano and Richard Rogers, is a high-tech architectural landmark. Its structural elements, plumbing, and electrical systems are all on the exterior, creating open interior spaces for art exhibition." },
+            { id: 25, title: "Avenir Typeface", artist: "Adrian Frutiger", year: 1988, category: "Typography", wikiSearch: "Avenir (typeface)", description: "The future of humanist sans-serif. Warm geometry.", description_ru: "Будущее гуманистического гротеска. Тёплая геометрия.", wiki: "Avenir is a geometric sans-serif typeface designed by Adrian Frutiger in 1988. Unlike purely geometric faces like Futura, Avenir includes subtle corrections and humanist touches that make it feel warm and natural despite its geometric foundation." },
+            { id: 26, title: "Olivetti Valentine", artist: "Ettore Sottsass", year: 1969, category: "Product Design", wikiSearch: "Olivetti Valentine", description: "A typewriter in red. Design as rebellion against office boredom.", description_ru: "Красная печатная машинка. Дизайн как бунт против офисной скуки.", wiki: "The Olivetti Valentine was a portable typewriter designed by Ettore Sottsass and Perry A. King. Its bright red color, compact size, and playful design challenged the convention that office equipment had to be utilitarian and boring. It's now in the permanent collection of MoMA." },
+            { id: 27, title: "Save Our Forests", artist: "Roman Cieślewicz", year: 1972, category: "Graphic Design", wikiSearch: "Roman Cieślewicz", description: "Polish poster that made trees weep. Visual activism at its finest.", description_ru: "Польский плакат, заставивший деревья плакать. Визуальный активизм.", wiki: "Roman Cieślewicz was a Polish graphic artist whose poster work for environmental causes in the 1970s used powerful photomontage techniques. His 'Save Our Forests' poster became an iconic example of visual communication for social causes." },
+            { id: 28, title: "Guggenheim Bilbao", artist: "Frank Gehry", year: 1997, category: "Architecture", wikiSearch: "Guggenheim Museum Bilbao", description: "Titanium curves that changed a city. Architecture as destination.", description_ru: "Титановые кривые, изменившие город. Архитектура как достопримечательность.", wiki: "The Guggenheim Museum Bilbao was designed by Frank Gehry and opened in 1997. Its flowing titanium and glass curves, created using CATIA software, sparked the 'Bilbao Effect' — where iconic architecture transforms a city's economic and cultural fortunes." },
+            { id: 29, title: "Helvetica Now", artist: "Monotype", year: 2019, category: "Typography", wikiSearch: "Helvetica Now", description: "The world's most famous typeface, redesigned for digital.", description_ru: "Самый знаменитый шрифт мира, переделанный для цифровых экранов.", wiki: "Helvetica Now is a redesign of Helvetica by Monotype, released in 2019. It features three optical sizes (Micro, Text, Display) and improved legibility at small sizes while maintaining the character of the original 1957 design by Max Miedinger." },
+            { id: 30, title: "Egg Chair", artist: "Arne Jacobsen", year: 1958, category: "Product Design", wikiSearch: "Egg Chair", description: "Organic curves for the lobby of SAS Royal Hotel. Sculpture you can sit in.", description_ru: "Органические изгибы для лобби SAS Royal Hotel. Скульптура, в которой можно сидеть.", wiki: "The Egg Chair was designed by Arne Jacobsen in 1958 for the SAS Royal Hotel in Copenhagen. Its enveloping form, created using hot-pressed foam and fiberglass, offers privacy and comfort in open spaces. It remains one of the most recognizable chair designs in history." }
         ];
         
-        let currentIndex = 0;
+        let currentIndex = Math.floor(Math.random() * works.length);
         let lang = 'en';
         let menuOpen = false;
         
@@ -608,7 +658,6 @@
         const wikiLink = document.getElementById('wikiLink');
         const menuOverlay = document.getElementById('menuOverlay');
         const menuList = document.getElementById('menuList');
-        const splash = document.getElementById('splash');
         const splashText = document.getElementById('splashText');
         const cards3d = document.getElementById('cards3d');
         
@@ -622,18 +671,28 @@
             'iPod': 'images/ipod.png',
             'WWF Panda Logo': 'images/panda.jpg',
             'Barcelona Pavilion': 'images/barcelona-pavilion.jpg',
-            'Spotify Brand': 'images/smartphone.jpg',
+            'Spotify Brand': 'images/spotify.jpg',
             'Braun SK 4': 'images/dieter-rams.jpg',
             'Moscow Metro Posters': 'images/rodchenko.jpg',
             'Dyson AirMultiplier': 'images/dyson.jpg',
             'WeTransfer Identity': 'images/wetransfer.png',
             'TWA Terminal': 'images/twa-terminal.jpg',
-            'Venmo Brand': 'images/smartphone.jpg',
+            'Venmo Brand': 'images/venmo.jpg',
             'Porsche 911': 'images/porsche-911.jpg',
             'Tokyo Olympics Pictograms': 'images/tokyo-1964.png',
             'Frog Design': 'images/frog-design.jpg',
             'Bloomberg Businessweek': 'images/bloomberg.jpg',
-            'Dieter Rams Principles': 'images/dieter-rams.jpg'
+            'Dieter Rams Principles': 'images/dieter-rams-portrait.jpg',
+            'Olympic Rings': 'images/olympic-rings.jpg',
+            'Lampe Gras': 'images/lampe-gras.jpg',
+            'Swiss Style Poster': 'images/muller-brockmann.jpg',
+            'Centre Pompidou': 'images/centre-pompidou.jpg',
+            'Avenir Typeface': 'images/avenir-typeface.jpg',
+            'Olivetti Valentine': 'images/olivetti-valentine.jpg',
+            'Save Our Forests': 'images/forest-destruction.jpg',
+            'Guggenheim Bilbao': 'images/guggenheim-bilbao.jpg',
+            'Helvetica Now': 'images/helvetica-now.jpg',
+            'Egg Chair': 'images/egg-chair.jpg'
         };
         
         async function fetchWikipediaData(searchQuery) {
@@ -682,28 +741,39 @@
             let imageSrc = localImages[work.title] || null;
             let wikiExtractText = '';
             
-            try {
-                const response = await fetch(`https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(work.wikiSearch)}&prop=extracts&exintro=1&explaintext=1&format=json&origin=*`);
-                const data = await response.json();
-                const pages = data.query?.pages;
-                if (pages) {
-                    for (const pageId in pages) {
-                        const page = pages[pageId];
-                        if (pageId !== '-1' && page.extract) {
-                            wikiExtractText = page.extract.length > 400 
-                                ? page.extract.substring(0, 400) + '...' 
-                                : page.extract;
-                            wikiLink.href = `https://en.wikipedia.org/wiki/${encodeURIComponent(page.title)}`;
-                            break;
-                        }
+            if (!imageSrc) {
+                const wikiData = await fetchWikipediaData(work.wikiSearch);
+                if (wikiData) {
+                    imageSrc = wikiData.image;
+                    if (wikiData.extract) {
+                        wikiExtractText = wikiData.extract.length > 400 
+                            ? wikiData.extract.substring(0, 400) + '...' 
+                            : wikiData.extract;
+                        wikiLink.href = wikiData.pageUrl;
                     }
                 }
-            } catch (error) {
-                console.warn('Wikipedia fetch failed:', error);
             }
             
-            if (localImages[work.title]) {
-                imageSrc = localImages[work.title];
+            if (!wikiExtractText) {
+                try {
+                    const response = await fetch(`https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(work.wikiSearch)}&prop=extracts&exintro=1&explaintext=1&format=json&origin=*`);
+                    const data = await response.json();
+                    const pages = data.query?.pages;
+                    if (pages) {
+                        for (const pageId in pages) {
+                            const page = pages[pageId];
+                            if (pageId !== '-1' && page.extract) {
+                                wikiExtractText = page.extract.length > 400 
+                                    ? page.extract.substring(0, 400) + '...' 
+                                    : page.extract;
+                                wikiLink.href = `https://en.wikipedia.org/wiki/${encodeURIComponent(page.title)}`;
+                                break;
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.warn('Wikipedia fetch failed:', error);
+                }
             }
             
             if (wikiExtractText) {
@@ -727,11 +797,13 @@
         }
         
         function renderMenu() {
-            menuList.innerHTML = works.map((work, index) => `
+            menuList.innerHTML = works.map((work, index) => {
+                const imgSrc = localImages[work.title] || imageCache[work.wikiSearch]?.image || '';
+                return `
                 <button class="menu-item" data-index="${index}">
                     <div class="menu-item-inner">
                         <div class="menu-item-image">
-                            <img src="${localImages[work.title] || imageCache[work.wikiSearch]?.image || ''}" alt="" loading="lazy" onload="this.classList.add('loaded')">
+                            ${imgSrc ? `<img src="${imgSrc}" alt="" loading="lazy" onload="this.classList.add('loaded')" onerror="this.style.display='none'">` : ''}
                             <div class="menu-item-placeholder">${work.title[0]}</div>
                         </div>
                         <div class="menu-item-info">
@@ -741,7 +813,8 @@
                         </div>
                     </div>
                 </button>
-            `).join('');
+                `;
+            }).join('');
             
             menuList.querySelectorAll('.menu-item').forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -799,12 +872,24 @@
         document.getElementById('menuBtn').addEventListener('click', toggleMenu);
         document.getElementById('menuBtnOverlay').addEventListener('click', toggleMenu);
         
+<<<<<<< HEAD
         // Tap zones for navigation
         const tapPrev = document.getElementById('tapPrev');
         const tapNext = document.getElementById('tapNext');
         
+=======
+>>>>>>> f2b22db374d85795661b6cf305e942ed0b4fc207
         function nextWork() {
             currentIndex = (currentIndex + 1) % works.length;
+            renderWork(currentIndex);
+        }
+
+        function randomWork() {
+            let newIndex = Math.floor(Math.random() * works.length);
+            while (newIndex === currentIndex && works.length > 1) {
+                newIndex = Math.floor(Math.random() * works.length);
+            }
+            currentIndex = newIndex;
             renderWork(currentIndex);
         }
         
@@ -813,6 +898,7 @@
             renderWork(currentIndex);
         }
         
+<<<<<<< HEAD
         tapPrev.addEventListener('click', prevWork);
         tapNext.addEventListener('click', nextWork);
         
@@ -821,6 +907,15 @@
         });
         
         document.getElementById('nextBtn').addEventListener('click', nextWork);
+=======
+        wikiLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            window.open(wikiLink.href, '_blank');
+        });
+        
+        document.getElementById('nextBtn').addEventListener('click', randomWork);
+>>>>>>> f2b22db374d85795661b6cf305e942ed0b4fc207
         
         document.querySelectorAll('.lang-toggle').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -832,37 +927,38 @@
             });
         });
         
-        function typewriterEffect(element, text, callback) {
+        const splashLoader = document.getElementById('splashLoader');
+        const splashRoulette = document.getElementById('splashRoulette');
+
+        
+        function typewriterEffect(element, text) {
+            if (!element) return;
             let i = 0;
-            element.innerHTML = '<span class="cursor"></span>';
-            const cursor = element.querySelector('.cursor');
-            
             function type() {
-                if (i < text.length) {
-                    element.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
+                if (i <= text.length) {
+                    element.textContent = text.substring(0, i);
                     i++;
                     setTimeout(type, 60);
                 } else {
                     setTimeout(() => {
-                        element.innerHTML = '';
+                        element.textContent = '';
                         i = 0;
                         setTimeout(type, 1000);
                     }, 2000);
                 }
             }
-            
             type();
         }
-        
-        function initSplash() {
+
+        async function initSplash() {
             const cardIds = ['card1', 'card2', 'card3', 'card4', 'card5', 'card6', 'card7'];
             const radius = 100;
-            
+
             cardIds.forEach((id, i) => {
                 const card = document.getElementById(id).parentElement;
                 const angle = (i / cardIds.length) * 360;
                 card.style.transform = `rotateY(${angle}deg) translateZ(${radius}px) translateX(-50%)`;
-                
+
                 const img = document.getElementById(id);
                 const workIndex = (currentIndex + i) % works.length;
                 const work = works[workIndex];
@@ -871,18 +967,34 @@
                     img.src = imageSrc;
                 }
             });
+
+            const splashTextEl = document.getElementById('splashText');
+            if (splashTextEl) {
+                typewriterEffect(splashTextEl, 'Learn design together');
+            }
             
-            typewriterEffect(splashText, 'Learn design together');
+            for (const work of works) {
+                if (!localImages[work.title] && !imageCache[work.wikiSearch]) {
+                    fetchWikipediaData(work.wikiSearch);
+                }
+            }
         }
-        
-        function hideSplash() {
-            splash.classList.add('hidden');
+
+        function hideLoader() {
+            splashLoader.classList.add('hidden');
+            splashRoulette.classList.remove('hidden');
         }
-        
-        splash.addEventListener('click', hideSplash);
-        
+
+        function startApp() {
+            splashRoulette.classList.add('hidden');
+            randomWork();
+        }
+
+        splashLoader.addEventListener('click', hideLoader);
+        splashRoulette.addEventListener('click', startApp);
+
         initSplash();
-        renderWork(0);
+        renderWork(currentIndex);
     </script>
 </body>
 </html>

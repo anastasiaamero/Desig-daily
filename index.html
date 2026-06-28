@@ -148,6 +148,10 @@
             align-items: center;
             z-index: 50;
         }
+
+        body.menu-open .bottom-bar {
+            display: none;
+        }
         
         /* Card */
         .card-image {
@@ -333,7 +337,7 @@
             position: fixed;
             inset: 0;
             background: var(--fg);
-            z-index: 40;
+            z-index: 80;
             display: flex;
             flex-direction: column;
             opacity: 0;
@@ -603,7 +607,7 @@
                     <line x1="3" y1="18" x2="21" y2="18" stroke="white"/>
                 </svg>
             </button>
-            <button class="lang-toggle lang-toggle-light" id="langToggle">En/Ru</button>
+            <button class="lang-toggle lang-toggle-light">En/Ru</button>
         </div>
         <div class="menu-content">
             <div class="menu-grid" id="menuList"></div>
@@ -640,13 +644,27 @@
             { id: 27, title: "Save Our Forests", artist: "Roman Cieślewicz", year: 1972, category: "Graphic Design", wikiSearch: "Roman Cieślewicz", description: "Polish poster that made trees weep. Visual activism at its finest.", description_ru: "Польский плакат, заставивший деревья плакать. Визуальный активизм.", wiki: "Roman Cieślewicz was a Polish graphic artist whose poster work for environmental causes in the 1970s used powerful photomontage techniques. His 'Save Our Forests' poster became an iconic example of visual communication for social causes." },
             { id: 28, title: "Guggenheim Bilbao", artist: "Frank Gehry", year: 1997, category: "Architecture", wikiSearch: "Guggenheim Museum Bilbao", description: "Titanium curves that changed a city. Architecture as destination.", description_ru: "Титановые кривые, изменившие город. Архитектура как достопримечательность.", wiki: "The Guggenheim Museum Bilbao was designed by Frank Gehry and opened in 1997. Its flowing titanium and glass curves, created using CATIA software, sparked the 'Bilbao Effect' — where iconic architecture transforms a city's economic and cultural fortunes." },
             { id: 29, title: "Helvetica Now", artist: "Monotype", year: 2019, category: "Typography", wikiSearch: "Helvetica Now", description: "The world's most famous typeface, redesigned for digital.", description_ru: "Самый знаменитый шрифт мира, переделанный для цифровых экранов.", wiki: "Helvetica Now is a redesign of Helvetica by Monotype, released in 2019. It features three optical sizes (Micro, Text, Display) and improved legibility at small sizes while maintaining the character of the original 1957 design by Max Miedinger." },
-            { id: 30, title: "Egg Chair", artist: "Arne Jacobsen", year: 1958, category: "Product Design", wikiSearch: "Egg Chair", description: "Organic curves for the lobby of SAS Royal Hotel. Sculpture you can sit in.", description_ru: "Органические изгибы для лобби SAS Royal Hotel. Скульптура, в которой можно сидеть.", wiki: "The Egg Chair was designed by Arne Jacobsen in 1958 for the SAS Royal Hotel in Copenhagen. Its enveloping form, created using hot-pressed foam and fiberglass, offers privacy and comfort in open spaces. It remains one of the most recognizable chair designs in history." }
+            { id: 30, title: "Egg Chair", artist: "Arne Jacobsen", year: 1958, category: "Product Design", wikiSearch: "Egg Chair", description: "Organic curves for the lobby of SAS Royal Hotel. Sculpture you can sit in.", description_ru: "Органические изгибы для лобби SAS Royal Hotel. Скульптура, в которой можно сидеть.", wiki: "The Egg Chair was designed by Arne Jacobsen in 1958 for the SAS Royal Hotel in Copenhagen. Its enveloping form, created using hot-pressed foam and fiberglass, offers privacy and comfort in open spaces. It remains one of the most recognizable chair designs in history." },
+            { id: 31, title: "Bauhaus Dessau", artist: "Walter Gropius", year: 1926, category: "Architecture", wikiSearch: "Bauhaus Dessau", image_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Dessau_asv2022-08_img23_Bauhaus.jpg/960px-Dessau_asv2022-08_img23_Bauhaus.jpg", description: "The school building that made Bauhaus ideas physical.", description_ru: "Здание школы, в котором идеи Баухауса стали архитектурой.", wiki: "Bauhaus Dessau is the school building designed by Walter Gropius after the Bauhaus moved from Weimar to Dessau. Its glass curtain walls, workshop wing, and functional plan became an icon of modern architecture.", wiki_ru: "Bauhaus Dessau — здание школы, спроектированное Вальтером Гропиусом после переезда Баухауса из Веймара в Дессау. Стеклянные фасады, мастерские и функциональная планировка сделали его иконой модернизма." },
+            { id: 32, title: "Red and Blue Chair", artist: "Gerrit Rietveld", year: 1917, category: "Product Design", wikiSearch: "Red and Blue Chair", image_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Ngv_design%2C_gerrit_rietveld%2C_red-blue_chair_1917_01.JPG/960px-Ngv_design%2C_gerrit_rietveld%2C_red-blue_chair_1917_01.JPG", description: "A chair reduced to planes, lines, and primary color.", description_ru: "Кресло, сведённое к плоскостям, линиям и основным цветам.", wiki: "The Red and Blue Chair is a chair designed by Gerrit Rietveld. It became one of the clearest furniture expressions of De Stijl, turning structure and color into a three-dimensional composition.", wiki_ru: "Red and Blue Chair — кресло Геррита Ритвельда и один из самых ясных предметных образов De Stijl: конструкция и цвет превращены в трёхмерную композицию." },
+            { id: 33, title: "Fallingwater", artist: "Frank Lloyd Wright", year: 1935, category: "Architecture", wikiSearch: "Fallingwater", image_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Fallingwater3.jpg/960px-Fallingwater3.jpg", description: "A house suspended over a waterfall in the Pennsylvania forest.", description_ru: "Дом, нависающий над водопадом в лесу Пенсильвании.", wiki: "Fallingwater is a house designed by Frank Lloyd Wright in the Laurel Highlands of Pennsylvania. Its cantilevered terraces and relationship to the waterfall made it a landmark of organic architecture.", wiki_ru: "Fallingwater — дом Фрэнка Ллойда Райта в Пенсильвании. Консольные террасы и связь с водопадом сделали его одним из главных примеров органической архитектуры." },
+            { id: 34, title: "Sydney Opera House", artist: "Jorn Utzon", year: 1973, category: "Architecture", wikiSearch: "Sydney Opera House", image_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Sydney_Australia._%2821339175489%29.jpg/960px-Sydney_Australia._%2821339175489%29.jpg", description: "Sculptural shells that turned a performing arts centre into a national symbol.", description_ru: "Скульптурные оболочки, превратившие театр в национальный символ.", wiki: "The Sydney Opera House is a performing arts centre in Sydney designed by Jorn Utzon. Its shell-like roof forms made it one of the most recognizable buildings of the twentieth century.", wiki_ru: "Sydney Opera House — центр исполнительских искусств в Сиднее, спроектированный Йорном Утзоном. Крыши-оболочки сделали его одним из самых узнаваемых зданий XX века." },
+            { id: 35, title: "Louvre Pyramid", artist: "I. M. Pei", year: 1989, category: "Architecture", wikiSearch: "Louvre Pyramid", image_url: "https://upload.wikimedia.org/wikipedia/en/thumb/4/42/Louvre_Pyramid.jpg/960px-Louvre_Pyramid.jpg", description: "A glass entrance that made a historic museum feel newly contemporary.", description_ru: "Стеклянный вход, который заново осовременил исторический музей.", wiki: "The Louvre Pyramid is the glass and metal entrance to the Louvre Museum designed by I. M. Pei. The project became a famous dialogue between contemporary geometry and a historic palace.", wiki_ru: "Пирамида Лувра — стеклянно-металлический вход в музей, спроектированный И. М. Пэем. Это известный диалог современной геометрии и исторического дворца." },
+            { id: 36, title: "I Love New York", artist: "Milton Glaser", year: 1977, category: "Graphic Design", wikiSearch: "I Love New York", image_url: "https://upload.wikimedia.org/wikipedia/commons/d/d5/I_Love_New_York.svg", description: "A tourism mark that became shorthand for a whole city.", description_ru: "Туристический знак, ставший визуальным сокращением целого города.", wiki: "I Love New York is a slogan and logo created for a tourism campaign. Milton Glaser's mark became one of the most copied and recognizable pieces of civic graphic design.", wiki_ru: "I Love New York — слоган и логотип туристической кампании. Знак Милтона Глейзера стал одним из самых узнаваемых и копируемых примеров городской графики." }
         ];
         
         let currentIndex = Math.floor(Math.random() * works.length);
         let lang = 'en';
         let menuOpen = false;
         
+        const categoryTranslations = {
+            "Architecture": "Архитектура",
+            "Editorial": "Редакционный дизайн",
+            "Graphic Design": "Графический дизайн",
+            "Product Design": "Предметный дизайн",
+            "Typography": "Типографика"
+        };
+
         const cardImg = document.getElementById('cardImg');
         const cardPlaceholder = document.getElementById('cardPlaceholder');
         const workTitle = document.getElementById('workTitle');
@@ -694,6 +712,35 @@
             'Helvetica Now': 'images/helvetica-now.jpg',
             'Egg Chair': 'images/egg-chair.jpg'
         };
+
+        function getCategoryLabel(category, compact = false) {
+            if (lang === 'ru') return categoryTranslations[category] || category;
+            return compact ? category.replace(/\s/g, '') : category;
+        }
+
+        function getMenuMeta(work) {
+            const separator = lang === 'ru' ? ' / ' : ', ';
+            return `${work.artist}, ${work.year}${separator}${getCategoryLabel(work.category)}`;
+        }
+
+        function getWorkImage(work) {
+            return localImages[work.title] || work.image_url || imageCache[work.wikiSearch]?.image || '';
+        }
+
+        function getWikiText(work) {
+            const source = lang === 'ru' ? (work.wiki_ru || work.wiki) : work.wiki;
+            return source || '';
+        }
+
+        function updateLanguageUI() {
+            document.documentElement.lang = lang === 'ru' ? 'ru' : 'en';
+            const newText = lang === 'en' ? 'En/Ru' : 'Ru/En';
+            document.querySelectorAll('.lang-toggle').forEach(btn => {
+                btn.textContent = newText;
+                btn.setAttribute('aria-label', lang === 'en' ? 'Switch to Russian' : 'Switch to English');
+            });
+            wikiLink.textContent = lang === 'ru' ? 'Читать в Wikipedia →' : 'Read on Wikipedia →';
+        }
         
         async function fetchWikipediaData(searchQuery) {
             if (imageCache[searchQuery]) return imageCache[searchQuery];
@@ -733,12 +780,12 @@
             workTitle.textContent = work.title;
             workDescription.textContent = lang === 'en' ? work.description : work.description_ru;
             workYear.textContent = work.year;
-            workCategory.textContent = work.category.replace(/\s/g, '');
+            workCategory.textContent = getCategoryLabel(work.category, true);
             
             cardImg.classList.remove('loaded');
             cardPlaceholder.textContent = work.title[0];
             
-            let imageSrc = localImages[work.title] || null;
+            let imageSrc = getWorkImage(work) || null;
             let wikiExtractText = '';
             
             if (!imageSrc) {
@@ -779,8 +826,9 @@
             if (wikiExtractText) {
                 wikiText.textContent = wikiExtractText;
                 wikiExtract.classList.add('visible');
-            } else if (work.wiki) {
-                const wikiShort = work.wiki.length > 400 ? work.wiki.substring(0, 400) + '...' : work.wiki;
+            } else if (getWikiText(work)) {
+                const localWiki = getWikiText(work);
+                const wikiShort = localWiki.length > 400 ? localWiki.substring(0, 400) + '...' : localWiki;
                 wikiText.textContent = wikiShort;
                 wikiExtract.classList.add('visible');
             } else {
@@ -798,7 +846,7 @@
         
         function renderMenu() {
             menuList.innerHTML = works.map((work, index) => {
-                const imgSrc = localImages[work.title] || imageCache[work.wikiSearch]?.image || '';
+                const imgSrc = getWorkImage(work);
                 return `
                 <button class="menu-item" data-index="${index}">
                     <div class="menu-item-inner">
@@ -809,7 +857,7 @@
                         <div class="menu-item-info">
                             <span class="menu-item-num">${String(index + 1).padStart(2, '0')}</span>
                             <p class="menu-item-title">${work.title}</p>
-                            <p class="menu-item-meta">${work.artist}, ${work.year}</p>
+                            <p class="menu-item-meta">${getMenuMeta(work)}</p>
                         </div>
                     </div>
                 </button>
@@ -829,11 +877,28 @@
                     img.classList.add('loaded');
                 }
             });
+
+            works.forEach((work, index) => {
+                if (getWorkImage(work)) return;
+                fetchWikipediaData(work.wikiSearch).then(data => {
+                    if (!data?.image) return;
+                    const imageBox = menuList.querySelector(`.menu-item[data-index="${index}"] .menu-item-image`);
+                    if (!imageBox || imageBox.querySelector('img')) return;
+                    const img = document.createElement('img');
+                    img.src = data.image;
+                    img.alt = '';
+                    img.loading = 'lazy';
+                    img.onload = () => img.classList.add('loaded');
+                    img.onerror = () => img.remove();
+                    imageBox.prepend(img);
+                });
+            });
         }
         
         function toggleMenu() {
             menuOpen = !menuOpen;
             menuOverlay.classList.toggle('active', menuOpen);
+            document.body.classList.toggle('menu-open', menuOpen);
             document.body.style.overflow = menuOpen ? 'hidden' : '';
             document.querySelector('.header').style.display = menuOpen ? 'none' : 'flex';
             
@@ -872,13 +937,6 @@
         document.getElementById('menuBtn').addEventListener('click', toggleMenu);
         document.getElementById('menuBtnOverlay').addEventListener('click', toggleMenu);
         
-<<<<<<< HEAD
-        // Tap zones for navigation
-        const tapPrev = document.getElementById('tapPrev');
-        const tapNext = document.getElementById('tapNext');
-        
-=======
->>>>>>> f2b22db374d85795661b6cf305e942ed0b4fc207
         function nextWork() {
             currentIndex = (currentIndex + 1) % works.length;
             renderWork(currentIndex);
@@ -898,16 +956,6 @@
             renderWork(currentIndex);
         }
         
-<<<<<<< HEAD
-        tapPrev.addEventListener('click', prevWork);
-        tapNext.addEventListener('click', nextWork);
-        
-        wikiLink.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
-        
-        document.getElementById('nextBtn').addEventListener('click', nextWork);
-=======
         wikiLink.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -915,13 +963,11 @@
         });
         
         document.getElementById('nextBtn').addEventListener('click', randomWork);
->>>>>>> f2b22db374d85795661b6cf305e942ed0b4fc207
         
         document.querySelectorAll('.lang-toggle').forEach(btn => {
             btn.addEventListener('click', () => {
                 lang = lang === 'en' ? 'ru' : 'en';
-                const newText = lang === 'en' ? 'En/Ru' : 'Ru/En';
-                document.querySelectorAll('.lang-toggle').forEach(b => b.textContent = newText);
+                updateLanguageUI();
                 renderWork(currentIndex);
                 if (menuOpen) renderMenu();
             });
@@ -962,7 +1008,7 @@
                 const img = document.getElementById(id);
                 const workIndex = (currentIndex + i) % works.length;
                 const work = works[workIndex];
-                const imageSrc = localImages[work.title] || imageCache[work.wikiSearch]?.image;
+                const imageSrc = getWorkImage(work);
                 if (imageSrc) {
                     img.src = imageSrc;
                 }
@@ -974,7 +1020,7 @@
             }
             
             for (const work of works) {
-                if (!localImages[work.title] && !imageCache[work.wikiSearch]) {
+                if (!getWorkImage(work)) {
                     fetchWikipediaData(work.wikiSearch);
                 }
             }
@@ -994,6 +1040,7 @@
         splashRoulette.addEventListener('click', startApp);
 
         initSplash();
+        updateLanguageUI();
         renderWork(currentIndex);
     </script>
 </body>

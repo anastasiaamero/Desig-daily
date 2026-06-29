@@ -1026,13 +1026,18 @@
             }
         }
 
+        function showApp() {
+            splashLoader.classList.add('hidden');
+            splashRoulette.classList.add('hidden');
+        }
+
         function hideLoader() {
             splashLoader.classList.add('hidden');
             splashRoulette.classList.remove('hidden');
         }
 
         function startApp() {
-            splashRoulette.classList.add('hidden');
+            showApp();
             randomWork();
         }
 
@@ -1042,6 +1047,7 @@
         initSplash();
         updateLanguageUI();
         renderWork(currentIndex);
+        setTimeout(showApp, 900);
     </script>
 </body>
 </html>
